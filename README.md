@@ -1,1 +1,1 @@
-# JavaScript-Project-Jonas-s-Course
+# JavaScript-Project-Jonas's-Course
