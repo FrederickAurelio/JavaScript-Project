@@ -260,6 +260,8 @@ btnClose.addEventListener("click", function (e) {
         inputClosePin.value = inputCloseUsername.value = "";
         inputClosePin.blur();
         inputCloseUsername.blur();
+        
+        labelWelcome.textContent = `Log in to get started`;
     }
 });
 
