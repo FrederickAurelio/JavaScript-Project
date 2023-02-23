@@ -123,6 +123,7 @@ const imgObserver = new IntersectionObserver(loadImg, {
 imgTargets.forEach(img => imgObserver.observe(img));
 
 // Slider Components
+const section3 = document.querySelector("#section--3");
 const btnLeft = document.querySelector(".slider__btn--left");
 const btnRight = document.querySelector(".slider__btn--right");
 const slides = document.querySelectorAll(".slide");
@@ -135,37 +136,46 @@ const createDots = function () {
         const html = `<button class="dots__dot" data-slide="${i}"></button>`;
         dotsContainer.insertAdjacentHTML("beforeend", html)
     })
-}
+};
 const activeDots = function (curSlide) {
     document.querySelectorAll(".dots__dot").forEach(dot => dot
         .classList.remove("dots__dot--active"));
     document.querySelector(`.dots__dot[data-slide="${curSlide}"]`)
         .classList.add("dots__dot--active");
-}
+};
 const goToSlide = function (curSlide) {
     slides.forEach((s, i) => {
         s.style.transform = `translateX(${(i - curSlide) * 100}%)`;
     });
+};
+const resetInterval = function (auto) {
+    clearInterval(autoSlide);
+    if (!auto) {
+        autoSlide = setInterval(() => nextSlide(true), 10000);
+    } else {
+        autoSlide = setInterval(() => nextSlide(true), 5000);
+    }
 }
-const nextSlide = function () {
+const nextSlide = function (auto = false) {
+    resetInterval(auto)
     if (curSlide === maxSlide - 1) curSlide = 0;
     else curSlide += 1;
     goToSlide(curSlide);
-    activeDots(curSlide)
+    activeDots(curSlide);
 };
-const prevSlide = function () {
+const prevSlide = function (auto = false) {
+    resetInterval(auto)
     if (curSlide === 0) curSlide = maxSlide - 1;
     else curSlide -= 1;
     goToSlide(curSlide);
-    activeDots(curSlide)
-}
-
+    activeDots(curSlide);
+};
 goToSlide(curSlide);
 createDots();
 activeDots(curSlide);
 
-btnRight.addEventListener("click", nextSlide)
-btnLeft.addEventListener("click", prevSlide);
+btnRight.addEventListener("click", () => nextSlide());
+btnLeft.addEventListener("click", () => prevSlide());
 document.addEventListener("keydown", function (e) {
     if (e.key === "ArrowRight") nextSlide();
     else if (e.key === "ArrowLeft") prevSlide();
@@ -173,6 +183,17 @@ document.addEventListener("keydown", function (e) {
 dotsContainer.addEventListener("click", function (e) {
     if (!e.target.classList.contains("dots__dot")) return;
     curSlide = Number(e.target.dataset.slide);
-    goToSlide(curSlide)
-    activeDots(curSlide)
+    goToSlide(curSlide);
+    activeDots(curSlide);
 });
+
+let autoSlide;
+const section3Observer = new IntersectionObserver(function (entries) {
+    const [entry] = entries;
+    if(entry.isIntersecting) autoSlide = setInterval(() => nextSlide(true), 5000);
+    else clearInterval(autoSlide);
+}, {
+    root: null,
+    threshold: 0.5,
+});
+section3Observer.observe(section3);
