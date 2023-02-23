@@ -19,7 +19,7 @@ Password : 2222
 - Working with Dates and Currency
 
 ## Bakinst Front Page
-
+![Bankist Front Page](https://user-images.githubusercontent.com/121996224/220828721-cf884280-3e72-4e7d-ac56-1a40e3a9933e.png)
 ### Features
 - Modal Window
 - Button Scrolling
