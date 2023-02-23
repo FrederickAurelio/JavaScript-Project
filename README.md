@@ -9,3 +9,24 @@ Password : 1111
 
 User : jd,
 Password : 2222
+### Features
+- Fake - LogIn
+- Transfer money
+- Request Loan
+- Close account
+- Sort
+- Auto Log Out when Inactive
+- Working with Dates and Currency
+
+## Bakinst Front Page
+
+### Features
+- Modal Window
+- Button Scrolling
+- Page Navigation
+- Tabbed Component
+- Menu Fade Animation
+- Sticky Navigation when Scroll to Section
+- Reveal Section
+- Lazy Loading Image
+- Slider/Quote Components
